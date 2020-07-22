@@ -355,9 +355,9 @@ read:
                      * Forced eviction failed: check if this transaction is keeping content pinned
                      * in cache.
                      */
-                    if (force_attempts > 1 &&
-                      (ret = __wt_txn_is_blocking(session, true)) == WT_ROLLBACK)
-                        WT_STAT_CONN_INCR(session, cache_eviction_force_rollback);
+                    if (force_attempts > 1)
+                        ret = __wt_txn_is_blocking(session, true);
+                        //WT_STAT_CONN_INCR(session, cache_eviction_force_rollback);
                     WT_RET(ret);
                     stalled = true;
                     break;
