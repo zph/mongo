@@ -1,0 +1,21 @@
+FROM amazonlinux:latest
+
+RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+RUN yum update -y; yum clean all
+RUN yum install -y git
+
+RUN git clone --branch r3.4.9 --single-branch https://github.com/evanlimanto/mongo
+RUN cd mongo && git checkout r3.4.9
+
+RUN yum install -y \
+  python2 \
+  python2-scons \
+  gcc \
+  gcc-c++ \
+  make
+
+RUN yum install -y boost-devel
+
+RUN g++ --version
+RUN echo $PATH
+RUN cd mongo && scons
