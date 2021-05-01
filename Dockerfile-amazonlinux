@@ -4,8 +4,7 @@ RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.n
 RUN yum update -y; yum clean all
 RUN yum install -y git
 
-RUN git clone --branch r3.4.9 --single-branch https://github.com/evanlimanto/mongo
-RUN cd mongo && git checkout r3.4.9
+RUN git clone https://github.com/evanlimanto/mongo
 
 RUN yum install -y \
   python2 \
@@ -16,6 +15,7 @@ RUN yum install -y \
 
 RUN yum install -y boost-devel
 
-RUN g++ --version
-RUN echo $PATH
-RUN cd mongo && scons
+RUN cd mongo \
+  && git fetch origin el-build-local \
+  && git reset --hard origin/el-build-local \
+  && SCONSFLAGS="-j 9" scons --disable-warnings-as-errors
