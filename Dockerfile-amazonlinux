@@ -18,7 +18,7 @@ COPY . ./
 # Commit where el-build-local branched off
 RUN git fetch origin 175bae1bcfa539c82745c6139e418b4c88158228 \
   && git reset --hard 175bae1bcfa539c82745c6139e418b4c88158228 \
-  && SCONSFLAGS="-j 9" scons --disable-warnings-as-errors
+  && SCONSFLAGS="-j 9" scons --disable-warnings-as-errors --cache="all"
 
 
 FROM amazonlinux:latest as final
@@ -30,4 +30,4 @@ COPY --from=base /build/scons/cache /build/scons/cache
 
 RUN git fetch origin el-build-local \
   && git reset --hard origin/el-build-local \
-  && SCONSFLAGS="-j 9" scons --disable-warnings-as-errors
+  && SCONSFLAGS="-j 9" scons --disable-warnings-as-errors --cache="all"
