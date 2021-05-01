@@ -124,10 +124,10 @@ private:
     MultiIndexBlock* const _indexer;
 };
 
-MultiIndexBlock::MultiIndexBlock(OperationContext* txn, Collection* collection, bool skipCollectionScanForAbsentFields = false)
+MultiIndexBlock::MultiIndexBlock(OperationContext* txn, Collection* collection, bool skipCollectionScanForAbsentFields)
     : _collection(collection),
       _txn(txn),
-      _skipCollectionScanForAbsentFields(_skipCollectionScanForAbsentFields),
+      _skipCollectionScanForAbsentFields(skipCollectionScanForAbsentFields),
       _buildInBackground(false),
       _allowInterruption(false),
       _ignoreUnique(false),
