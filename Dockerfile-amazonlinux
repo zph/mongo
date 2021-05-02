@@ -14,7 +14,7 @@ RUN yum install -y \
 
 WORKDIR /build
 # Use git clone to avoid invalidating cache here
-RUN git clone https://github.com/evanlimanto/mongo
+RUN git clone https://github.com/evanlimanto/mongo /build
 
 # Commit where el-build-local branched off
 RUN git fetch origin 175bae1bcfa539c82745c6139e418b4c88158228 \
